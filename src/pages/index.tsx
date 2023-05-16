@@ -6,6 +6,8 @@ import { api } from "~/utils/api";
 const Home: NextPage = () => {
   const { data } = api.posts.getAll.useQuery(); // runs on user's device
 
+  console.log(process.env.DATABASE_URL);
+
   return (
     <>
       <Head>
