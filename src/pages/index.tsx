@@ -1,6 +1,7 @@
 import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { type NextPage } from "next";
 import Head from "next/head";
+import { CreatePostWizard } from "~/components/CreatePostWizard";
 
 import { api } from "~/utils/api";
 
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
   const user = useUser();
 
   async function signInWithGitHub() {
-    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+    await supabaseClient.auth.signInWithOAuth({
       provider: "github",
     });
   }
@@ -42,10 +43,11 @@ const Home: NextPage = () => {
           ) : (
             <button onClick={signInWithGitHub}>Sign in</button>
           )}
+          {!!user ? <CreatePostWizard /> : null}
           <div className=" flex flex-col">
-            {data?.map((post) => (
+            {data?.map(({ post, author }) => (
               <div key={post.id} className="border-b border-slate-400 p-8">
-                {post.content}
+                {post.content} by {author?.username}
               </div>
             ))}
           </div>

@@ -6,11 +6,10 @@ import {
 } from "@supabase/auth-helpers-react";
 
 import { api } from "~/utils/api";
-import { type AppRouter } from "~/server/api/root";
 
 import "~/styles/globals.css";
 
-const supabaseClient = createBrowserSupabaseClient<AppRouter>();
+const supabaseClient = createBrowserSupabaseClient();
 
 const MyApp: AppType<{
   initialSession: Session;
