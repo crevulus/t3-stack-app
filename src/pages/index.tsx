@@ -2,6 +2,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { CreatePostWizard } from "~/components/CreatePostWizard";
+import { Post } from "~/components/Post";
 
 import { api } from "~/utils/api";
 
@@ -38,17 +39,17 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex h-screen justify-center">
         <div className="w-full border-x border-slate-400 bg-red-200 md:max-w-2xl">
-          {!!user ? (
-            <button onClick={signOut}>Sign out</button>
-          ) : (
-            <button onClick={signInWithGitHub}>Sign in</button>
-          )}
+          <button
+            className="rounded border border-gray-400 bg-white px-4 py-2 font-semibold text-gray-800 shadow hover:bg-gray-100"
+            onClick={!!user ? signOut : signInWithGitHub}
+          >
+            {!!user ? "Sign Out" : "Sign In With Github"}
+          </button>
+
           {!!user ? <CreatePostWizard /> : null}
           <div className=" flex flex-col">
-            {data?.map(({ post, author }) => (
-              <div key={post.id} className="border-b border-slate-400 p-8">
-                {post.content} by {author?.username}
-              </div>
+            {data?.map((item) => (
+              <Post item={item} key={item.post.id} />
             ))}
           </div>
         </div>
