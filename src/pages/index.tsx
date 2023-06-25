@@ -2,6 +2,7 @@ import { useSupabaseClient, useUser } from "@supabase/auth-helpers-react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { CreatePostWizard } from "~/components/CreatePostWizard";
+import { FullPageLoadingSpinner } from "~/components/LoadingSpinner";
 import { Post } from "~/components/Post";
 
 import { api } from "~/utils/api";
@@ -23,7 +24,7 @@ const Home: NextPage = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <FullPageLoadingSpinner size={56} />;
   }
 
   if (!data) {

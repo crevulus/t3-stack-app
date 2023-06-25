@@ -32,7 +32,7 @@ export const Post = ({ item }: { item: PostWithUser }) => {
           <span>{`@${item.author.user_name}`}</span>
           <span className="font-thin">• {relativeDate}</span>
         </div>
-        <span>{item.post.content}</span>
+        <span className="text-xl">{item.post.content}</span>
       </div>
     </div>
   );
